@@ -4,6 +4,4 @@ class Card:
         self.value = v
 
     def show(self):
-        print(f"Suit: {self.suit} | Value: {self.value}")
-
-        
+        print(f"{self.value} of {self.suit}")

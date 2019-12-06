@@ -30,5 +30,5 @@ class Deck:
         try:
             return self.cards.pop()
         except IndexError as e:
-            print(e)
+            print("The deck is empty")
 
