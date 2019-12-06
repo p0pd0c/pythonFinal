@@ -5,10 +5,11 @@ from deck import Deck
 from person import Person
 from dealer import Dealer
 
+
 # A simple game of blackjack
 # Upon playing, the user is asked for a name which will be written to a leaderboard file with wins and losses listed
 # If the user gives a name already in the leaderboard, their play will affect that name's stats
-def main():
+def blackjack():
     try:
         # Get leaders from leaderboard to display
         leaderboard = open('leaderboard.txt', 'r')
@@ -21,7 +22,7 @@ def main():
             # Splitting because the data structure is "name wins losses"
             line = line.split(" ")
             print(line[0], "/", line[1], "/", line[2])
-            leaders[line[0]] = [line[1], line[2]]
+            leaders[line[0]] = [line[1], line[2].rstrip()]
         leaderboard.close()
         print("_______________________________________________________________________________________________________")
 
@@ -88,7 +89,9 @@ def main():
             print("***************************************************************************************************")
             print("---------------------------------------------------------------------------------------------------")
             player.show()
+            print(player.get_hand_total(deck))
             dealer.show()
+            print(dealer.get_hand_total(deck))
             print("---------------------------------------------------------------------------------------------------")
 
             # Update W/L
@@ -98,7 +101,7 @@ def main():
             # Write updated stats back to leaderboard
             leaderboard = open("leaderboard.txt", 'w')
             for leader, stats in leaders.items():
-                line = f"{leader} {stats[0]} {stats[1]}"
+                line = f"{leader} {stats[0]} {stats[1]}\n"
                 leaderboard.write(line)
             leaderboard.close()
 
@@ -115,4 +118,4 @@ def main():
         leaderboard.close()
 
 
-main()
+

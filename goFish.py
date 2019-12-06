@@ -6,7 +6,8 @@ import random
 CARDS = ('A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K')
 DECK = CARDS * 4
 
-def main():
+
+def go_fish():
     try:
         name = str(input("Please enter your name: "))  
     except ValueError:
@@ -306,5 +307,4 @@ def record(name,pScore,cScore):
     else:
         infile.write(name + " beat the computer with a score of " + str(pScore) + " to " + str(cScore) + "!\n")
 
-# calls the main function
-main()
+

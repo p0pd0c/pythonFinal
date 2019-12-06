@@ -1,5 +1,6 @@
 # Jared DiScipio | CS021 Gold | Final | Blackjack
 
+
 # A person object for blackjack
 # Needs a name upon creation
 # Keeps track of own hand and game status
@@ -11,13 +12,17 @@ class Person:
 
     # Recursively allow the player to continue playing  until they bust => stay or stay
     def action(self, deck, opponent):
-        if not self.stay:
+        if not self.stay and not self.get_hand_total(deck) == 21:
             self.show()
             print("Dealer's Hand: ")
             for card in opponent.hand[1:]:
                 card.show()
 
-            act = int(input("Hit Or Stay (0 | 1): "))
+            act = input("Hit Or Stay (0 | 1): ")
+            while not act.isnumeric():
+                act = input("Hit Or Stay (0 | 1): ")
+
+            act = int(act)
             if act == 0 and not self.is_bust(deck):
                 self.hand.append(deck.deal())
                 # Enter back into function to ask for next play
@@ -28,6 +33,7 @@ class Person:
     # Add up the value of the hand
     def get_hand_total(self, deck):
         total = 0
+        # Number of aces in the hand
         aces = 0
         for card in self.hand:
             # Add up all non aces, face cards worth 10
@@ -38,12 +44,17 @@ class Person:
             else:
                 aces += 1
 
-        # Now account for all aces, making sure that they are added as either 1 or 11 depending on current total
-        for i in range(aces):
-            if total + 11 <= 21:
-                total += 11
-            elif total + 11 > 21:
-                total += 1
+        # Maximize aces: Add them up advantageously
+        if aces == 4 and total <= 7:
+            total += 14
+        elif aces == 3 and total <= 8:
+            total += 13
+        elif aces == 2 and total <= 9:
+            total += 12
+        elif aces == 1 and total <= 10:
+            total += 11
+        else:
+            total += aces
 
         return total
 
