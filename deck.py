@@ -1,7 +1,15 @@
+# Jared DiScipio | CS021 Gold | Final | Blackjack
+
 import random
 from card import Card
 
 
+# Keeps track of cards
+# Can be made empty
+# Can be 'built' to have a sorted deck
+# Can be shuffled to make it a shuffled deck
+# Can be displayed
+# Cards can be dealt and they will leave the deck
 class Deck:
     def __init__(self):
         self.values = []
