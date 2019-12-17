@@ -1,8 +1,11 @@
+# Ben Smith and Jared DiScipio
+
 import goFish
 import blackjack
 
 
 # This is the swap between go fish and blackjack
+# Ben Smith, Jared DiScipio
 def main():
     play_again = True
     while play_again:
